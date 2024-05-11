@@ -1,0 +1,54 @@
+; SPDX-License-Identifier: BSD-3-Clause
+; Copyright(c) 2010-2018 Intel Corporation
+
+;                 _______________
+; LINK0 RXQ0 --->|               |---> LINK0 TXQ0
+;                |               |
+; LINK1 RXQ0 --->|               |---> LINK1 TXQ0
+;                |   Firewall    |
+; LINK2 RXQ0 --->|               |---> LINK2 TXQ0
+;                |               |
+; LINK3 RXQ0 --->|               |---> LINK3 TXQ0
+;                |_______________|
+;                        |
+;                       -+-
+;
+; Input packet: Ethernet/IPv4
+;
+; Packet buffer layout:
+; #   Field Name            Offset (Bytes)      Size (Bytes)
+; 0   Mbuf                  0                   128
+; 1   Headroom              128                 128
+; 2   Ethernet header       256                 14
+; 3   IPv4 header           270                 20
+
+mempool MEMPOOL0 buffer 2304 pool 32K cache 256 cpu 0
+
+link LINK0 dev 0000:03:00.0 rxq 1 128 MEMPOOL0 txq 1 512 promiscuous on
+
+; table action profile AP0 ipv4 offset 270 fwd
+table action profile AP0 ipv4 offset 270 fwd stats both
+
+pipeline PIPELINE0 period 10 offset_port_id 0 cpu 0
+
+pipeline PIPELINE0 port in bsz 32 link LINK0 rxq 0
+
+
+; pipeline PIPELINE0 port out bsz 32 link LINK0 txq 0
+pipeline PIPELINE0 port out bsz 32 sink
+pipeline PIPELINE0 port out bsz 32 sink
+pipeline PIPELINE0 port out bsz 32 sink
+
+pipeline PIPELINE0 table match acl ipv4 offset 270 size 20K action AP0
+pipeline PIPELINE0 table match acl ipv4 offset 270 size 20K action AP0
+pipeline PIPELINE0 table match acl ipv4 offset 270 size 20K action AP0
+pipeline PIPELINE0 table match acl ipv4 offset 270 size 20K action AP0
+
+pipeline PIPELINE0 port in 0 table 0
+
+thread 1 pipeline PIPELINE0 enable
+pipeline PIPELINE0 table 0 rule add match default action fwd table 1
+pipeline PIPELINE0 table 0 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_0.rules
+pipeline PIPELINE0 table 1 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_1.rules
+pipeline PIPELINE0 table 2 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_2.rules
+pipeline PIPELINE0 table 3 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_3.rules

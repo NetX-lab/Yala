@@ -1,0 +1,5 @@
+<?xml version="1.0" standalone="yes"?>
+<?xml-stylesheet type="application/xml" href="http://www.lcdf.org/click/xml/elementmap.xsl"?>
+<?xml-stylesheet type="application/xml" href="file:///home/sfwu22/smartnic_workspace/Tomur/click/etc/elementmap.xsl"?>
+<elementmap xmlns="http://www.lcdf.org/click/xml/" sourcedir="/home/sfwu22/smartnic_workspace/Tomur/click" src="file:///home/sfwu22/smartnic_workspace/Tomur/click" provides="aarch64 analysis dpdk int64 linux pcap umultithread" drivers="userlevel">
+</elementmap>

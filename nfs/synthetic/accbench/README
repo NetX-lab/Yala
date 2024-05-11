@@ -1,0 +1,98 @@
+-----------------
+| PREREQUISITES |
+-----------------
+
+1. PKG-CONFIG
+
+- Version 0.29 is required (earlier versions may lead to run-time issues)
+  Note that some Centos machines come with 0.27 installed.
+  Version can be verified with:
+	pkg-config --version
+
+- One method of upgrade can be carried out with the following steps:
+	wget pkg-config.freedesktop.org/releases/pkg-config-0.29.1.tar.gz
+	tar xvfz pkg-config-0.29.1.tar.gz
+	cd pkg-config-0.29.1/
+	./configure --prefix=/usr/local/pkg_config/0_29_1 --with-internal-glib
+	make
+	make install
+	mv /usr/bin/pkg-config /usr/bin/pkg-config-backup
+	ln -s /usr/local/pkg_config/0_29_1/bin/pkg-config /usr/bin
+
+
+------------------------
+| INSTALLATION OPTIONS |
+------------------------
+
+1. MAKE FILE
+
+- Ensure dpdk is installed system wide. Clone the DPDK repo:
+	meson build
+	cd build
+	ninja
+	sudo ninja install
+	sudo ldconfig
+
+   Unnecessary drivers can be removed by updating the meson build line. E.g.
+	meson -Ddisable_drivers='regex/octeontx2' build
+
+- Install hyperscan system wide with apt/yum or from source.
+  If hyperscan is not to be used, the -lhs and -DUSE_HYPERSCAN should be
+  removed from the Make file.
+
+- Build RXPBench app
+	make
+
+  The rxpbench-static binary will be in build/ with an rxpbench link
+
+
+2. AS DPDK EXAMPLE
+
+- Clone DPDK repo (tested up to 20.11)
+
+- Copy rxpbench folder to dpdk/examples
+
+- Apply the following patch from the repo to the dpdk source
+	cd dpdk
+	git apply examples/rxpbench/0001-configure-dpdk-for-rxpbench.patch
+
+- Build dpdk as follows:
+	meson -Dexamples=rxpbench build
+	cd build
+	ninja
+
+- The binary 'dpdk-rxpbench' is in dpdk/build/examples.
+  Note that Hyperscan will be included if it is installed on the system.
+  If undetected then the HS mode will be unavailable in the binary.
+
+
+--------------------------
+| BUILDING DEBS AND RPMS |
+--------------------------
+
+1. GENERAL
+
+- Both debs and rpm builds require DPDK and Hyperscan to be installed on the
+  system. See 'MAKE FILE' section.
+
+
+2. DEB BUILD
+
+- In rxpbench folder:
+	sudo dpkg-buildpackage -us -uc -b
+
+- Debs file is created one directory down.
+
+
+3. RPM BUILD:
+
+- Copy the rxpbench folder to rxpbench-21.06 and tar:
+	cp -r rxpbench rxpbench-21.06
+	tar -zcvf rxpbench-21.06.tar.gz rxpbench-21.06
+
+- Create rpm on the tarball:
+	sudo rpmbuild -ta rxpbench-21.06.tar.gz
+
+- Generated rpms are in the following location:
+	cd /root/rpmbuild/RPMS/x86_64
+
