@@ -12,6 +12,7 @@ to accurately predict NF performance under multi-resource contention and varying
 - NVIDIA BlueField-2 MBF2H332A-AENOT SmartNIC
 
 ### Software
+- Python 3.8
 - Python libraries
     - `scikit-learn`==0.24.2 
     - `numpy`==1.19.5
@@ -25,13 +26,28 @@ to accurately predict NF performance under multi-resource contention and varying
     - `DOCA` 1.5-LTS
 
 ## Usage
-- Offline profiling/training
-    - 
-We provide example training/testing set of FlowMonitor for reference.  
-- Online prediction
-    - 
+- Offline profiling/training: 
 
-Provide a group of example data?
+    To train Tomur, you need to collect training data that contains the following content in each data entry:
+    - performance counters
+    - traffic attributes
+    - NF throughput
+
+    We provide example training sets of FlowMonitor in `/profile/flowmon` for reference. To train Tomur using example training set, run following command:
+    ```terminal
+    cd model
+    python3 train.py
+    ```
+    For detailed requirements of training data, please refer to `/model/train.py` and our paper.
+- Online prediction:
+
+    Each entry of testing data is similar to training data entries.
+    We provide an example testing set of FlowMonitor in `/profile/flowmon` for reference. To use the testing set, run following command:
+    ```terminal
+    cd model
+    python3 predict.py
+    ```
+    For detailed requirements of testing data, please refer to `/model/predict.py` and our paper.
 
 ## Repo Structure
 - `click/` Source code of Click Modular Router. Note that we add some additional elements to the original version.
@@ -82,6 +98,6 @@ make elemlist
 make
 make install
 ```
-#### Compile DOCA Samples
+<!-- #### Compile DOCA Samples
 
-#### Compile DPDK Pipeline
+#### Compile DPDK Pipeline -->
