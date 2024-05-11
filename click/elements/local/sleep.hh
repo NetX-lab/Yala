@@ -1,6 +1,6 @@
 /*
  * sleep.{cc,hh} -- 
- * Shaofeng Wu
+ * Tomur authors
  */
 #ifndef CLICK_SLEEP_HH
 #define CLICK_SLEEP_HH

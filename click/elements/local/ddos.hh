@@ -1,6 +1,6 @@
 /*
  * ddos.{cc,hh} -- element uses hardware compression accelerator to conduct data compression 
- * Shaofeng Wu
+ * Tomur authors
  */
 #ifndef CLICK_DDOS_HH
 #define CLICK_DDOS_HH

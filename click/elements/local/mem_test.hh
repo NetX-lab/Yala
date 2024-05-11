@@ -1,6 +1,6 @@
 /*
  * mem_test.{cc,hh} -- 
- * Shaofeng Wu
+ * Tomur authors
  */
 #ifndef CLICK_MEMTEST_HH
 #define CLICK_MEMTEST_HH
