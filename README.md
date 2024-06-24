@@ -1,5 +1,5 @@
-# Tomur
-Tomur is a performance prediction framework for on-NIC NFs, featuring
+# Yala
+Yala is a performance prediction framework for on-NIC NFs, featuring
 - multi-resource contention modeling
 - traffic-aware modeling
 
@@ -28,12 +28,12 @@ to accurately predict NF performance under multi-resource contention and varying
 ## Usage
 - Offline profiling/training: 
 
-    To train Tomur, you need to collect training data that contains the following content in each data entry:
+    To train Yala, you need to collect training data that contains the following content in each data entry:
     - performance counters
     - traffic attributes
     - NF throughput
 
-    We provide example training sets of FlowMonitor in `/profile/flowmon` for reference. To train Tomur using example training set, run following command:
+    We provide example training sets of FlowMonitor in `/profile/flowmon` for reference. To train Yala using example training set, run following command:
     ```terminal
     cd model
     python3 train.py
@@ -55,7 +55,7 @@ to accurately predict NF performance under multi-resource contention and varying
 - `nfs/` Example network functions.
 - `profile/` Example profile of network functions.
 - `rulesets/` Ruleset for regex accelerator.
-- `tool/` Related tools used by Tomur. 
+- `tool/` Related tools used by Yala. 
 - `traffic_profile/` Example traffic profiles.
 
 ## Additional Tips
@@ -81,8 +81,8 @@ The above commnad will start `regex-bench` on core 0. It will send each packet i
 
 ### Collecting Memory-related Performance Counters
 Below is an example of collecting runtime performance counters of a `click` process.
-Tomur uses [`perf-tools`](https://github.com/brendangregg/perf-tools) to collect hardware performance counters. 
-Since no counter provides cache occupancy (or equivalent information) on Bluefield-2, Tomur leverages a [software-based tool](https://www.brendangregg.com/wss.html) to estimate working set size. 
+Yala uses [`perf-tools`](https://github.com/brendangregg/perf-tools) to collect hardware performance counters. 
+Since no counter provides cache occupancy (or equivalent information) on Bluefield-2, Yala leverages a [software-based tool](https://www.brendangregg.com/wss.html) to estimate working set size. 
 ```terminal
 # Hardware performance counter collection
 perf stat -p $(pidof -s click) -e cycles,instructions,inst_retired,l2d_cache_rd,l2d_cache_wr,l2d_cache,mem_access_rd,mem_access_wr sleep 3
