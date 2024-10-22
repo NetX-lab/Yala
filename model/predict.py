@@ -39,8 +39,8 @@ def predict(nf, df, model_name="models.pkl",verbose=False):
     y_test = df['perf']
     linear = models[nf]["linear"]
     slomo = models[nf]['slomo']
-    tomur_mem = models[nf]['tomur_mem']
-    tomur_reg = models[nf]["tomur_reg"]
+    yala_mem = models[nf]['yala_mem']
+    yala_reg = models[nf]["yala_reg"]
     
     y_pred_lr = linear.predict(df[['ipc', 'irt', 'l2crd', 'l2cwr', 'memrd', 'memwr', 'wss']])
     y_pred_slomo = slomo.predict(df[['ipc', 'irt', 'l2crd', 'l2cwr', 'memrd', 'memwr', 'wss']]) # Predicted values    
@@ -61,18 +61,18 @@ def predict(nf, df, model_name="models.pkl",verbose=False):
     # for index, row in extrapolate_rows.iterrows():
     #     y_pred_slomo[index] = y_pred_slomo[index] + parse_perf(f"../../Exp_data/profile/{nf}/pc/target_perf_{flowsz}_{pktsz}") - solo_perf_old
 
-    y_pred_tomur = []
-    y_pred_tomur_mem = tomur_mem.predict(df[['pktsize','flowsize','ipc', 'irt', 'l2crd', 'l2cwr', 'memrd', 'memwr', 'wss']])
-    y_pred_tomur_regex = []
-    self_inverse = tomur_reg.predict(df[["mtbr"]])   
+    y_pred_yala = []
+    y_pred_yala_mem = yala_mem.predict(df[['pktsize','flowsize','ipc', 'irt', 'l2crd', 'l2cwr', 'memrd', 'memwr', 'wss']])
+    y_pred_yala_regex = []
+    self_inverse = yala_reg.predict(df[["mtbr"]])   
     inverse_sum = df["inverse_sum"]
     for t0,t1 in zip(self_inverse,inverse_sum): 
         result = 1/(t0+t1)
-        y_pred_tomur_regex.append(result)
+        y_pred_yala_regex.append(result)
     
-    for y_mem,y_regex in zip(y_pred_tomur_mem,y_pred_tomur_regex):
+    for y_mem,y_regex in zip(y_pred_yala_mem,y_pred_yala_regex):
         perf = compose_by_pattern([1,1], [y_mem,y_regex], [1,0])
-        y_pred_tomur.append(perf)
+        y_pred_yala.append(perf)
 
 
     mape = {}
@@ -81,19 +81,19 @@ def predict(nf, df, model_name="models.pkl",verbose=False):
     pm10= {}
     mape['linear'] = 100*mean_absolute_percentage_error(y_test, y_pred_lr)
     mape['slomo'] = 100*mean_absolute_percentage_error(y_test, y_pred_slomo)
-    mape['regex'] = 100*mean_absolute_percentage_error(y_test, y_pred_tomur_regex)
-    mape['tomur'] = 100*mean_absolute_percentage_error(y_test, y_pred_tomur)
+    mape['regex'] = 100*mean_absolute_percentage_error(y_test, y_pred_yala_regex)
+    mape['yala'] = 100*mean_absolute_percentage_error(y_test, y_pred_yala)
 
 
     pm5['linear'] = PMACC(y_test, y_pred_lr,ratio=0.05)
     pm5['slomo'] = PMACC(y_test, y_pred_slomo,ratio=0.05)
-    pm5['regex'] = PMACC(y_test, y_pred_tomur_regex,ratio=0.05)
-    pm5['tomur'] = PMACC(y_test, y_pred_tomur,ratio=0.05)
+    pm5['regex'] = PMACC(y_test, y_pred_yala_regex,ratio=0.05)
+    pm5['yala'] = PMACC(y_test, y_pred_yala,ratio=0.05)
     
     pm10['linear'] = PMACC(y_test, y_pred_lr, ratio=0.1)
     pm10['slomo'] = PMACC(y_test, y_pred_slomo, ratio=0.1)
-    pm10['regex'] = PMACC(y_test, y_pred_tomur_regex, ratio=0.1)
-    pm10['tomur'] = PMACC(y_test, y_pred_tomur, ratio=0.1)    
+    pm10['regex'] = PMACC(y_test, y_pred_yala_regex, ratio=0.1)
+    pm10['yala'] = PMACC(y_test, y_pred_yala, ratio=0.1)    
     
 
     print(f"Model: {model_name}")
@@ -104,14 +104,14 @@ def predict(nf, df, model_name="models.pkl",verbose=False):
         {'Model': 'Linear','MAPE(%)': f"{mape['linear']:1.3f}", '+/-5% Acc(%)': f"{pm5['linear']:1.3f}", '+/-10% Acc(%)': f"{pm10['linear']:1.3f}"},
         {'Model': 'SLOMO','MAPE(%)': f"{mape['slomo']:1.3f}", '+/-5% Acc(%)': f"{pm5['slomo']:1.3f}", '+/-10% Acc(%)': f"{pm10['slomo']:1.3f}"},
         {'Model': 'Regex','MAPE(%)': f"{mape['regex']:1.3f}", '+/-5% Acc(%)': f"{pm5['regex']:1.3f}", '+/-10% Acc(%)': f"{pm10['regex']:1.3f}"},
-        {'Model': 'Tomur','MAPE(%)': f"{mape['tomur']:1.3f}", '+/-5% Acc(%)': f"{pm5['tomur']:1.3f}", '+/-10% Acc(%)': f"{pm10['tomur']:1.3f}"}
+        {'Model': 'yala','MAPE(%)': f"{mape['yala']:1.3f}", '+/-5% Acc(%)': f"{pm5['yala']:1.3f}", '+/-10% Acc(%)': f"{pm10['yala']:1.3f}"}
     ])
 
     print(tabulate(results, headers='keys', tablefmt='psql', showindex=False, numalign="left"))
 
     if verbose:
         err_all = []
-        for i, j in zip(y_test, y_pred_tomur):
+        for i, j in zip(y_test, y_pred_yala):
             print(np.abs(i-j)/i)
    
     return 1
