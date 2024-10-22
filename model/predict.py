@@ -104,7 +104,7 @@ def predict(nf, df, model_name="models.pkl",verbose=False):
         {'Model': 'Linear','MAPE(%)': f"{mape['linear']:1.3f}", '+/-5% Acc(%)': f"{pm5['linear']:1.3f}", '+/-10% Acc(%)': f"{pm10['linear']:1.3f}"},
         {'Model': 'SLOMO','MAPE(%)': f"{mape['slomo']:1.3f}", '+/-5% Acc(%)': f"{pm5['slomo']:1.3f}", '+/-10% Acc(%)': f"{pm10['slomo']:1.3f}"},
         {'Model': 'Regex','MAPE(%)': f"{mape['regex']:1.3f}", '+/-5% Acc(%)': f"{pm5['regex']:1.3f}", '+/-10% Acc(%)': f"{pm10['regex']:1.3f}"},
-        {'Model': 'yala','MAPE(%)': f"{mape['yala']:1.3f}", '+/-5% Acc(%)': f"{pm5['yala']:1.3f}", '+/-10% Acc(%)': f"{pm10['yala']:1.3f}"}
+        {'Model': 'Yala','MAPE(%)': f"{mape['yala']:1.3f}", '+/-5% Acc(%)': f"{pm5['yala']:1.3f}", '+/-10% Acc(%)': f"{pm10['yala']:1.3f}"}
     ])
 
     print(tabulate(results, headers='keys', tablefmt='psql', showindex=False, numalign="left"))
