@@ -60,7 +60,7 @@ Here we provide an example of training the model and using the model to predict 
 - `traffic_profile/` Example traffic profiles.
 
 ## Additional Tips
-### Use Synthetic Competitor
+### Using Synthetic NFs for Benchmarking
 - `mem-bench`
 ```terminal
 cd ./nfs/synthetic/membench/
