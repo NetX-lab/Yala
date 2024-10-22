@@ -25,8 +25,9 @@ to accurately predict NF performance under multi-resource contention and varying
     - `DPDK` MLNX_DPDK_20.11.6
     - `DOCA` 1.5-LTS
 
-## Usage
-- Offline profiling/training: 
+## Example Usage
+Here we provide an example of training the model and using the model to predict throughput for FlowMonitor. 
+- Offline training: 
 
     To train Yala, you need to collect training data that contains the following content in each data entry:
     - performance counters
