@@ -3,7 +3,7 @@ Yala is a performance prediction framework for on-NIC NFs, featuring
 - multi-resource contention modeling
 - traffic-aware modeling
 
-to accurately predict NF performance under multi-resource contention and varying traffic profiles. 
+to accurately predict NF performance on SmartNICs under multi-resource contention and varying traffic profiles. 
 
 <!-- refer to our paper at xxx -->
 
