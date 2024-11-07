@@ -48,7 +48,7 @@ pipeline PIPELINE0 port in 0 table 0
 
 thread 1 pipeline PIPELINE0 enable
 pipeline PIPELINE0 table 0 rule add match default action fwd table 1
-pipeline PIPELINE0 table 0 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_0.rules
-pipeline PIPELINE0 table 1 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_1.rules
-pipeline PIPELINE0 table 2 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_2.rules
-pipeline PIPELINE0 table 3 rule add bulk /root/Tomur/workloads/dpdk/ip_pipeline/examples/test_acl_16K_3.rules
+pipeline PIPELINE0 table 0 rule add bulk /root/Yala/workloads/dpdk/ip_pipeline/examples/test_acl_16K_0.rules
+pipeline PIPELINE0 table 1 rule add bulk /root/Yala/workloads/dpdk/ip_pipeline/examples/test_acl_16K_1.rules
+pipeline PIPELINE0 table 2 rule add bulk /root/Yala/workloads/dpdk/ip_pipeline/examples/test_acl_16K_2.rules
+pipeline PIPELINE0 table 3 rule add bulk /root/Yala/workloads/dpdk/ip_pipeline/examples/test_acl_16K_3.rules

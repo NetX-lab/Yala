@@ -1,6 +1,6 @@
 /*
  * regexmatch.{cc,hh} -- element uses hardware regex accelerator to conduct pattern matching 
- * Tomur authors
+ * Yala authors
  */
 #ifndef CLICK_REGEXMATCH_HH
 #define CLICK_REGEXMATCH_HH
