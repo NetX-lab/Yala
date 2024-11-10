@@ -54,7 +54,9 @@ Here we provide an example of training the model and using the model to predict 
 - `click/` Source code of Click Modular Router. Note that we add some additional elements to the original version.
 - `model/` Model training and prediction. 
 - `nfs/` Example network functions.
-- `profile/` Example profile of network functions.
+- `profile/` 
+    - `script/`: Scripts for profiling contention level and throughput of NFs.
+    - Others: Example profile of network functions.
 - `rulesets/` Ruleset for regex accelerator.
 - `tool/` Related tools used by Yala. 
 - `traffic_profile/` Example traffic profiles.
