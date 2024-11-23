@@ -13,7 +13,7 @@ mtbr=$9
 
         
 # start one competitor
-ssh -l root dpu "cd ~/PerfNIC/adaptive_profile ; 2>/dev/null ./start_competitor_snic.sh "${core}" "${competitor}" "${folder}" "${type}" "${rate}" "${size}" "${flowsz}" "${pktsz}" "${mtbr}"  ; exit" 
+ssh -l root dpu "cd ~/Yala/script ; 2>/dev/null ./start_competitor_snic.sh "${core}" "${competitor}" "${folder}" "${type}" "${rate}" "${size}" "${flowsz}" "${pktsz}" "${mtbr}"  ; exit" 
     
 
 

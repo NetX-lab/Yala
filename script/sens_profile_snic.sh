@@ -8,7 +8,7 @@
 # $7 flowsize
 # $8 pktsize
 
-# $9 regexprofile (for regexbench and multibench)
+# $9 regexprofile (for regexbench)
 
 # echo $1
 # echo $3
@@ -93,19 +93,6 @@ elif [ "$2" == "regbench" ]; then
     echo "" >> ./profile/"$1"/"$3"/target_perf_"$5"_"$9"
     echo "$5_$9" >> ./profile/"$1"/"$3"/target_perf_"$5"_"$9"
     sudo pkill accbench
-elif [ "$2" == "multibench" ]; then
-    echo "[INFO] Starting synthetic competitor $2"
-    # taskset -c 3 ../workloads/multibench/build/multibench -D "-l3 -n 1 -a 03:00.0,class=regex --file-prefix dpdk1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$9".pcap -d rxp -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate 0 --type "$4" --oppp "$5" --size "$6" --per-pkt-len > ./profile/"$1"/comp_tput_t"$1"_"$2"_"$3"_"$9" & 
-    taskset -c 3 ../workloads/multibench/build/multibench -D "-l3 -n 1 -a 03:00.0,class=regex --file-prefix dpdk1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$9".pcap -d rxp -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate 0 --type "$4" --oppp "$5" --size "$6" --per-pkt-len > /dev/null & 
-    sleep 3
-    echo "" > ./target_perf
-    sleep 10
-    cat ./target_perf > ./profile/"$1"/"$3"/target_perf_t"$4"_"$5"_"$6"_"$7"_"$8"_"$9"
-    echo "[INFO] Nf $1 performance collected with competitor multibench t$4_$5_$6_$7_$8"_"$9"
-    echo ""
-    echo "" >> ./profile/"$1"/"$3"/target_perf_t"$4"_"$5"_"$6"_"$7"_"$8"_"$9"
-    echo "t$4_$5_$6_$7_$8"_"$9" >> ./profile/"$1"/"$3"/target_perf_t"$4"_"$5"_"$6"_"$7"_"$8"_"$9"
-    sudo pkill "$3"
 fi
 
 

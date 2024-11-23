@@ -67,9 +67,6 @@ elif [ "$2" == "regbench" ]; then
 elif [ "$2" == "compbench" ]; then
     echo "[INFO] Starting synthetic competitor $2"
     taskset -c $1 ../workloads/accbench/build/accbench -D "-l$1 -n 1 -a 03:00.0,class=compress --file-prefix dpdk$1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$9".pcap -d comp_dpdk -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate "$5" --per-pkt-len  > /dev/null & 
-elif [ "$2" == "multibench" ]; then
-    echo "[INFO] Starting synthetic competitor $2"
-    taskset -c $1 ../workloads/multibench/build/multibench -D "-l$1 -n 1 -a 03:00.0,class=regex --file-prefix dpdk$1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$9".pcap -d rxp -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate 0 --type "$4" --oppp "$5" --size "$6" --per-pkt-len  > /dev/null & 
 fi
 
 
