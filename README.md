@@ -163,6 +163,10 @@ make elemlist
 make
 make install
 ```
+
+## Ackonwledgement
+We list open-source projects used by us and our modifications to them.
+TODO
 <!-- #### Compile DOCA Samples
 
 #### Compile DPDK Pipeline -->
