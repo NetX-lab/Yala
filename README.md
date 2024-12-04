@@ -38,14 +38,14 @@ To collect training and testing data for a specific NF, the following steps are 
 
 #### 2.2.1. Note: before you start
 - Please adapt our scripts to your own environment, e.g. adjusting the environment variables. For scripts that are not mentioned in the documentation, you can refer to the details of them and use them as helpers.   
-- In case the profiling can not be done due to environment limitations, e.g. you do not have a BF-2 SmartNIC in hand, we provide example training sets and testing sets of FlowMonitor in `/profile/flowmon` so that you can still test model training and throughput prediction (jump to [offline training](#23-offline-training)).
+- In case the profiling can not be done due to environment limitations, e.g. you do not have a BF-2 SmartNIC in hand, we provide example training sets and testing sets of FlowMonitor in `profile/flowmon` so that you can still test model training and throughput prediction (jump to [offline training](#23-offline-training)).
 
 #### 2.2.2. Contention level of synthetic benchmarks
-Contention level of `mem-bench` and `regex-bench` can be collected using `profile/script/metric_profile.sh`. In our experiments, we run the following command on the server hosting the SmartNIC.
+Contention level of `mem-bench` and `regex-bench` can be collected using `script/metric_profile.sh`. In our experiments, we run the following command on the server hosting the SmartNIC.
 ```bash
 bash metric_profile.sh membench
 ```
-This command will invoke `profile/script/metric_profile_mem_snic.sh` on the SmartNIC, which starts `mem-bench` and measures its performance counters with `perf-tools`. Please refer to the script to adjust the three parameters controlling contention level of `mem-bench` (memory access type, memory access speed and size of allocated memory buffer) to your targeted SmartNIC if needed (the current values are used by us).
+This command will invoke `script/metric_profile_mem_snic.sh` on the SmartNIC, which starts `mem-bench` and measures its performance counters with `perf-tools`. Please refer to the script to adjust the three parameters controlling contention level of `mem-bench` (memory access type, memory access speed and size of allocated memory buffer) to your targeted SmartNIC if needed (the current values are used by us).
 
 For `regex-bench`, please run 
 ```bash
