@@ -8,6 +8,16 @@ to accurately predict NF performance on SmartNICs under multi-resource contentio
 ## 1. Environment
 ### 1.1. Hardware
 - NVIDIA BlueField-2 MBF2H332A-AENOT SmartNIC
+#### Hardware configurations
+- Regex engine: we turn on the regex engine on BF-2 SmartNIC by
+```terminal
+systemctl start mlx-regex
+systemctl status mlx-regex
+```
+- Hugepage: we configure the hugepage of BF-2 SmartNCI as follows
+```terminal
+sudo echo 4096 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+```
 
 ### 1.2. Software
 - Python 3.8
