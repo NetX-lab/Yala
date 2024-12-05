@@ -48,7 +48,7 @@ if [ $1 == "membench" ] ; then
             for size in $(seq 0.5 0.5 6); do
                 # performance counter collecting, working set size estimation
                 ssh -l root dpu "cd ~/Yala/script ; mkdir -p ./profile/membench; 2>/dev/null ./metric_profile_mem_snic.sh ${type} ${rate} ${size} ; exit"
-                ssh -l root dpu "sudo pkill mbw ; exit"
+                ssh -l root dpu "sudo pkill membench ; exit"
             done
         done
     done    

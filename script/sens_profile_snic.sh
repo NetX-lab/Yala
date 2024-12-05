@@ -83,7 +83,7 @@ elif [ "$2" == "membench" ]; then
     sudo pkill mbw
 elif [ "$2" == "regbench" ]; then
     echo "[INFO] Starting synthetic competitor $2"
-    taskset -c 3 ../workloads/accbench/build/accbench -D "-l3 -n 1 -a 03:00.0,class=regex --file-prefix dpdk1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$9".pcap -d rxp -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate "$5" --per-pkt-len > ./profile/"$1"/"$3"/comp_tput_"$5"_"$9" & 
+    taskset -c 3 ../nfs/synthetic/accbench/build/accbench -D "-l3 -n 1 -a 03:00.0,class=regex --file-prefix dpdk1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$9".pcap -d rxp -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate "$5" --per-pkt-len > ./profile/"$1"/"$3"/comp_tput_"$5"_"$9" & 
     sleep 3
     echo "" > ./target_perf
     sleep 10

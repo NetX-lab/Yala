@@ -3,7 +3,7 @@
 
 echo "[INFO] Starting synthetic competitor $2_$4"
 
-taskset -c 3 ../workloads/accbench/build/accbench -D "-l3 -n 1 -a 03:00.0,class=regex --file-prefix dpdk1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$4".pcap -d rxp -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate "$2" --per-pkt-len > ./profile/regbench/"$4"/comp_tput_"$2"_"$4" & 
+taskset -c 3 ../nfs/synthetic/accbench/build/accbench -D "-l3 -n 1 -a 03:00.0,class=regex --file-prefix dpdk1" --input-mode pcap_file -f ../traffic_profile/pcap/p0/l7_filter_78/"$4".pcap -d rxp -r ../rulesets/l7_filter/build/l7_filter_selected.rof2.binary  -c 1 -s 100 --rate "$2" --per-pkt-len > ./profile/regbench/"$4"/comp_tput_"$2"_"$4" & 
 sleep 10
 echo "[INFO] Collecting synthetic competitor performance counters and throughput"
 

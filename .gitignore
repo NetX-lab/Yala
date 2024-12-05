@@ -1,2 +1,4 @@
-./model/_pycache_/*
-./model/*.pkl
+model/_pycache_/*
+model/*.pkl
+nfs/synthetic/accbench/build/
+nfs/synthetic/membench/membench
