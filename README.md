@@ -112,13 +112,13 @@ For detailed requirements of training data, please refer to [`model/train.py`](m
 
 ### 2.4. Online prediction:
 
-    Each entry of testing data is similar to training data entries.
-    We provide an example testing set of FlowMonitor in `/profile/flowmon` for reference. To use the testing set, run following command:
-    ```terminal
-    cd model
-    python3 predict.py
-    ```
-    For detailed requirements of testing data, please refer to `/model/predict.py` and our paper.
+Each entry of testing data is similar to training data entries.
+We provide an example testing set of FlowMonitor in `/profile/flowmon` for reference. To use the testing set, run following command:
+```terminal
+cd model
+python3 predict.py
+```
+For detailed requirements of testing data, please refer to `/model/predict.py` and our paper.
 
 ## 3. Repo Structure
 - [`click/`](click/) Source code of Click Modular Router. Note that we add some additional elements to the original version.
