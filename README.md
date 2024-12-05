@@ -47,7 +47,13 @@ To collect training and testing data for a specific NF, the following steps are 
 - Co-running target NFs with synthetic benchmarks to obtain throughput under different traffic profiles and contention levels.
 
 #### 2.2.1. Note: before you start
-- Please adapt our scripts to your own environment, e.g. adjusting the environment variables. For scripts that are not mentioned in the documentation, you can refer to the details of them and use them as helpers.   
+- Scripts may contain hardcoded parameters, e.g. PCIe address is set to `0000:03:00.0` for NFs. Please manually adapt our scripts to your own environment. Some of the fields that should be modified:
+    - Absolute path
+    - Username (DPU, host)
+    - DPU hostname
+    - PCIe address
+    - Application-specific parameters, e.g. parameters of `DPDK Pktgen`.
+- For scripts that are not mentioned in the documentation, you can refer to the details of them and use them as helpers.   
 - In case the profiling can not be done due to environment limitations, e.g. you do not have a BF-2 SmartNIC in hand, we provide example training sets and testing sets of FlowMonitor in `profile/flowmon` so that you can still test model training and throughput prediction (jump to [offline training](#23-offline-training)).
 
 #### 2.2.2. Contention level of synthetic benchmarks
