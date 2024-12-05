@@ -143,9 +143,9 @@ The above commnad will start `mem-bench` on core 0. It will do the "dumb-copy" o
 ```terminal
 cd ./nfs/synthetic/accbench/
 make
-taskset -c 0 ./accbench/build/accbench -D "-l0 -n 1 -a 03:00.0,class=regex --file-prefix dpdk0" \ 
+taskset -c 0 ./build/accbench -D "-l0 -n 1 -a 03:00.0,class=regex --file-prefix dpdk0" \ 
 --input-mode pcap_file -f ../../../traffic_profile/pcap/l7_filter/example.pcap \ 
--d rxp -r ../rulesets/l7_filter/build/l7_filter.rof2.binary \ 
+-d rxp -r ../../../rulesets/l7_filter/build/l7_filter.rof2.binary \ 
 -c 1 -s 100 --rate 1 --per-pkt-len
 ```
 The above commnad will start `regex-bench` on core 0. It will send each packet in `example.pcap` to regex accelerator to match against the `l7_filter.rof2.binary` ruleset. Such matching will last for `100` seconds at `1` Gbps.
@@ -196,4 +196,4 @@ We list open-source projects used by us and our modifications to them (if any).
             - Version: 1.0
         - [Stree-ng](https://github.com/ColinIanKing/stress-ng)
 - [Working set size estimation](https://www.brendangregg.com/wss.html)
-    - Directory: `tool/wss`      
+    - Directory: `tool/wss`
