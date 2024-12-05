@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Note: currently the script uses root@dpu where root is the username and dpu is the hostname of the target SmartNIC. Pleae change the username and hostname accordingly. 
+
 # $1 the competitor to be profiled
 # $1 can be 1) membench 2) nf
 

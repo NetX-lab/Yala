@@ -1,8 +1,11 @@
 #!/bin/bash
+
+# Note: change the username and hostname accordingly.
+
 # $1 for control interface ip address
 # $2 for script file name
 # $3 for script file type (pcap / lua)
-USERNAME=sfwu22
+USERNAME=username
 HOSTNAME=$1
 
 

@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# Note: currently the script requires root permission on target SmartNIC. 
 
 # $1 nf
 # $2 competitor

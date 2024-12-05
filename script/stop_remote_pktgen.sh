@@ -1,5 +1,8 @@
-# $1 for control interface ip address
+# !/bin/bash
 
+# Note: change the username and hostname accordingly.
+
+# $1 for control interface ip address
 USERNAME=sfwu22
 HOSTNAME=$1
 

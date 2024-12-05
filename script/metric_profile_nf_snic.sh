@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Note: currently the script requires root permission on target SmartNIC. 
+
 # $1: nf app name
 # $2: nf
 # $3: flowsz

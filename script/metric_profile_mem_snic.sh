@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Note: currently the script requires root permission on target SmartNIC. 
 
 echo "[INFO] Starting synthetic competitor $1_$2_$3"
 

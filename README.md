@@ -47,12 +47,13 @@ To collect training and testing data for a specific NF, the following steps are 
 - Co-running target NFs with synthetic benchmarks to obtain throughput under different traffic profiles and contention levels.
 
 #### 2.2.1. Note: before you start
-- Scripts may contain hardcoded parameters, e.g. PCIe address is set to `0000:03:00.0` for NFs. Please manually adapt our scripts to your own environment. Some of the fields that should be modified:
+- Scripts may contain hardcoded parameters, e.g. PCIe address is set to `0000:03:00.0` for NFs. Please manually adapt our scripts to your own environment. Some of the fields that should be modified are listed below Please check each script for comments on this.
     - Absolute path
-    - Username (DPU, host)
-    - DPU hostname
+    - Username (DPU, traffic generator)
+    - Hostname (DPU, traffic generator)
     - PCIe address
     - Application-specific parameters, e.g. parameters of `DPDK Pktgen`.
+- All scripts require root permission. This is because NFs and `DPDK Pktgen` require huge page.
 - For scripts that are not mentioned in the documentation, you can refer to the details of them and use them as helpers.   
 - In case the profiling can not be done due to environment limitations, e.g. you do not have a BF-2 SmartNIC in hand, we provide example training sets and testing sets of FlowMonitor in `profile/flowmon` so that you can still test model training and throughput prediction (jump to [offline training](#23-offline-training)).
 
@@ -102,12 +103,12 @@ To train Yala, you need to collect training data that contains the following con
 - traffic attributes
 - NF throughput
 
-We provide example training sets of FlowMonitor in `/profile/flowmon` for reference. To train Yala using example training set, run following command:
+We provide example training sets of FlowMonitor in [`profile/flowmon`](profile/flowmon) for reference. To train Yala using example training set, run following command:
 ```terminal
 cd model
 python3 train.py
 ```
-For detailed requirements of training data, please refer to `/model/train.py` and our paper.
+For detailed requirements of training data, please refer to [`model/train.py`](model/train.py) and our paper.
 
 ### 2.4. Online prediction:
 
@@ -120,14 +121,14 @@ For detailed requirements of training data, please refer to `/model/train.py` an
     For detailed requirements of testing data, please refer to `/model/predict.py` and our paper.
 
 ## 3. Repo Structure
-- `click/` Source code of Click Modular Router. Note that we add some additional elements to the original version.
-- `model/` Model training and prediction. 
-- `nfs/` Example network functions.
-- `profile/` Example profile of network functions.
-- `rulesets/` Ruleset for regex accelerator.
-- `script/` Scripts for profiling contention level and throughput of NFs.
-- `tool/` Related tools used by Yala. 
-- `traffic_profile/` Example traffic profiles.
+- [`click/`](click/) Source code of Click Modular Router. Note that we add some additional elements to the original version.
+- [`model/`](model/) Model training and prediction. 
+- [`nfs/`](nfs/) Example network functions.
+- [`profile/`](profile/) Example profile of network functions.
+- [`rulesets/`](rulesets/) Ruleset for regex accelerator.
+- [`script/`](script/) Scripts for profiling contention level and throughput of NFs.
+- [`tool/`](tool/) Related tools used by Yala. 
+- [`traffic_profile/`](traffic_profile/) Example traffic profiles.
 
 ## 4. Additional Tips
 ### 4.1. Using Synthetic NFs for Benchmarking
@@ -158,7 +159,7 @@ Since no counter provides cache occupancy (or equivalent information) on Bluefie
 # Hardware performance counter collection
 perf stat -p $(pidof -s click) -e cycles,instructions,inst_retired,l2d_cache_rd,l2d_cache_wr,l2d_cache,mem_access_rd,mem_access_wr sleep 3
 # Working set size estimation
-../tool/wss/wss.pl $(pidof -s click) 3 
+./tool/wss/wss.pl $(pidof -s click) 3 
 ```
 ### 4.3. NFs
 #### 4.3.1. Compile Click-DPDK
@@ -176,7 +177,7 @@ make install
 ## 5. Ackonwledgement
 We list open-source projects used by us and our modifications to them (if any).
 - Click
-    - Directory: `click/`
+    - Directory: [`click/`](click/)
     - Related projects
     - [Click modular router](https://github.com/kohler/click)
       - Version: 2.2
@@ -185,15 +186,15 @@ We list open-source projects used by us and our modifications to them (if any).
         - `RegexMatch` 
         - `Compress`
 - Accbench (regex-bench & compress-bench)
-    - Directory: `nfs/synthetic/accbench/`
+    - Directory: [`nfs/synthetic/accbench/`](nfs/synthetic/accbench/)
     - Reference projects
         - [RXPbench](https://docs.nvidia.com/doca/archive/doca-v1.5.0/rxpbench/index.html)
           - Version: 22.10          
 - Membench
-    - Directory: `nfs/synthetic/membench/`
+    - Directory: [`nfs/synthetic/membench/`](nfs/synthetic/membench/)
     - Reference projects
         - [Memory bandwidth benchmark](https://github.com/raas/mbw)
             - Version: 1.0
         - [Stree-ng](https://github.com/ColinIanKing/stress-ng)
 - [Working set size estimation](https://www.brendangregg.com/wss.html)
-    - Directory: `tool/wss`
+    - Directory: [`tool/wss`](tool/wss)
