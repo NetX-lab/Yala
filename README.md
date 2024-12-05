@@ -168,6 +168,26 @@ make install
 #### Compile DPDK Pipeline -->
 
 ## 5. Ackonwledgement
-We list open-source projects used by us and our modifications to them.
-TODO
-
+We list open-source projects used by us and our modifications to them (if any).
+- Click
+    - Directory: `click/`
+    - Related projects
+    - [Click modular router](https://github.com/kohler/click)
+      - Version: 2.2
+    - Modifications
+      - (+) Two hardware-based Click elements
+        - `RegexMatch` 
+        - `Compress`
+- Accbench (regex-bench & compress-bench)
+    - Directory: `nfs/synthetic/accbench/`
+    - Reference projects
+        - [RXPbench](https://docs.nvidia.com/doca/archive/doca-v1.5.0/rxpbench/index.html)
+          - Version: 22.10          
+- Membench
+    - Directory: `nfs/synthetic/membench/`
+    - Reference projects
+        - [Memory bandwidth benchmark](https://github.com/raas/mbw)
+            - Version: 1.0
+        - [Stree-ng](https://github.com/ColinIanKing/stress-ng)
+- [Working set size estimation](https://www.brendangregg.com/wss.html)
+    - Directory: `tool/wss`      
